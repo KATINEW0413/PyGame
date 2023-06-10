@@ -30,16 +30,12 @@ while play:
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_UP:
                 up_go = True
-                print("UP")
             if event.key == pygame.K_DOWN:
                 down_go = True
-                print("DOWN")
             if event.key == pygame.K_RIGHT:
                 right_go = True
-                print("RIGHT")
             if event.key == pygame.K_LEFT:
                 left_go = True
-                print("LEFT")
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_UP:
                 up_go = False
@@ -68,7 +64,7 @@ while play:
             x_pos = 0
 
     background.fill((0, 0, 0))
-    pygame.draw.circle(background, (255, 0, 0), (x_pos, y_pos), 15)            
+    pygame.draw.circle(background, (204, 102, 255), (x_pos, y_pos), 15)            
     pygame.display.update()
 
 pygame.quit()
