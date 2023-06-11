@@ -76,7 +76,8 @@ while play:
 
     screen.fill((0, 0, 0))
     screen.blit(ss, (x_pos-sms_x, y_pos-sms_y))
-    pygame.draw.circle(screen, (204, 102, 255), (x_pos, y_pos), 15)            
+    pygame.draw.circle(screen, (204, 102, 255), (x_pos-50, y_pos), 5)
+    pygame.draw.circle(screen, (204, 102, 255), (x_pos+50, y_pos), 5)            
     pygame.display.update()
 
 pygame.quit()
