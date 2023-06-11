@@ -1,2 +1,2 @@
-# PyGame
+# School PyGame Project 
  Pygame
