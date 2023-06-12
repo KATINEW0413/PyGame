@@ -3,6 +3,8 @@ import pygame
 pygame.init()
 
 size = [1600, 900]
+ssmiddlesize = [128, 76]
+mmmiddlesize = [55, 210]
 
 screen = pygame.display.set_mode(size)
 pygame.display.set_caption("PyGame made by MJ")
@@ -16,20 +18,21 @@ up_go = False
 down_go = False
 right_go = False
 left_go = False
-
-ssmiddlesize1 = 128
-ssmiddlesize2 = 67
+space_go = False
 
 ss = pygame.image.load("C:\Python\PyGame\SpaceShip.png").convert_alpha()
-ss = pygame.transform.scale(ss, (ssmiddlesize1, ssmiddlesize2))
+ss = pygame.transform.scale(ss, (ssmiddlesize[0], ssmiddlesize[1]))
 
-sms_x = round(ssmiddlesize1/2)
-sms_y = round(ssmiddlesize2/2)
+mm = pygame.image.load("C:\Python\PyGame\Missile.png").convert_alpha()
+mm = pygame.transform.scale(mm, (mmmiddlesize[0], mmmiddlesize[1]))
 
-to_x = 0
-to_y = 0
+sms_x = round(ssmiddlesize[0]/2)
+sms_y = round(ssmiddlesize[1]/2)
 
-move = 4
+mms_x = round(mmmiddlesize[0]/2)
+mms_y = round(mmmiddlesize[1]/2)
+
+move = 6
 
 play = True
 
@@ -47,6 +50,8 @@ while play:
                 right_go = True
             if event.key == pygame.K_LEFT:
                 left_go = True
+            if event.key == pygame.K_SPACE:
+                space_go = True
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_UP:
                 up_go = False
@@ -56,7 +61,8 @@ while play:
                 right_go = False
             if event.key == pygame.K_LEFT:
                 left_go = False
-
+            if event.key == pygame.K_SPACE:
+                space_go = False
     if up_go == True:
         y_pos -= move
         if y_pos <= 0:
@@ -76,6 +82,8 @@ while play:
 
     screen.fill((0, 0, 0))
     screen.blit(ss, (x_pos-sms_x, y_pos-sms_y))
+    screen.blit(mm, (x_pos-mms_x, y_pos-mms_y))
+
     pygame.draw.circle(screen, (204, 102, 255), (x_pos-50, y_pos), 5)
     pygame.draw.circle(screen, (204, 102, 255), (x_pos+50, y_pos), 5)            
     pygame.display.update()
