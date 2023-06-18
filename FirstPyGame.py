@@ -3,16 +3,22 @@ import random
 
 pygame.init()
 
-size = [1600, 900]
+size = [650, 900]
+screen = pygame.display.set_mode(size)
+
+kirby_transform = random.randint(96,804)
+
+
+title = "PyGame made by MJ"
+pygame.display.set_caption(title)
+
+clock = pygame.time.Clock()
+color = (0, 0, 0)
+
 Spaceshipmiddlesize = [128, 76]
-Missilemiddlesize = [140, 37]
+Missilemiddlesize = [37, 140]
 kirbysize = [110, 96]
 ghostsize = [121, 121]
-
-screen = pygame.display.set_mode(size)
-pygame.display.set_caption("PyGame made by MJ")
-
-fps = pygame.time.Clock()
 
 x_pos = screen.get_size()[0]/2
 y_pos = screen.get_size()[1]/2
@@ -23,8 +29,11 @@ right_go = False
 left_go = False
 space_go = False
 
-Spaceship = pygame.image.load("C:\Python\PyGame\SpaceShip.png").convert_alpha()
-Spaceship = pygame.transform.scale(Spaceship, (Spaceshipmiddlesize[0], Spaceshipmiddlesize[1]))
+ss = pygame.image.load("C:\Python\PyGame\SpaceShip.png").convert_alpha()
+ss = pygame.transform.scale(ss, (Spaceshipmiddlesize[0], Spaceshipmiddlesize[1]))
+ss_sx, ss_sy = ss.get_size()
+ss_x = round((size[0]/2)-(ss_sx/2))
+ss_y = round(size[1]-ss_sy-16)
 
 Missile = pygame.image.load("C:\Python\PyGame\Missile.png").convert_alpha()
 Missile = pygame.transform.scale(Missile, (Missilemiddlesize[0], Missilemiddlesize[1]))
@@ -48,11 +57,13 @@ ghost_x = round(ghostsize[0]/2)
 ghost_y = round(ghostsize[1]/2)
 
 move = 6
-
+kirbymove = 2
+kirbys=110
 play = True
-
+live = True
 while play:
-    deltaTime = fps.tick(60)
+    clock.tick(60)
+    
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             play = False
@@ -95,11 +106,15 @@ while play:
         if x_pos <= 0:
             x_pos = 0
 
-    screen.fill((0, 0, 0))
-    screen.blit(Spaceship, (x_pos-sms_x, y_pos-sms_y))
-    screen.blit(Missile, (x_pos-mms_x, y_pos-mms_y))
-    screen.blit(Kirby, (x_pos-kirby_x, y_pos-kirby_y))
-    screen.blit(Ghost, (x_pos-ghost_x, y_pos-ghost_y))
+
+    if live == True:
+        kirbys -= -2
+
+    screen.fill(color)
+    screen.blit(ss, (ss_x, ss_y))
+    #screen.blit(Missile, (x_pos-mms_x, y_pos-mms_y))
+    screen.blit(Kirby, (kirby_transform, kirbys))
+    #screen.blit(Ghost, (x_pos-ghost_x, y_pos-ghost_y))
 
     pygame.display.update()
 
