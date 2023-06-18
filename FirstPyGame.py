@@ -115,6 +115,7 @@ while play:
     #screen.blit(Missile, (x_pos-mms_x, y_pos-mms_y))
     screen.blit(Kirby, (kirby_transform, kirbys))
     #screen.blit(Ghost, (x_pos-ghost_x, y_pos-ghost_y))
+    # 커비 여러마리 생성
 
     pygame.display.update()
 
