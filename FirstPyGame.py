@@ -6,7 +6,7 @@ pygame.init()
 size = [650, 900]
 screen = pygame.display.set_mode(size)
 
-kirby_transform = random.randint(96,804)
+kirby_transform = random.randint(96, 554)
 
 
 title = "PyGame made by MJ"
@@ -33,7 +33,7 @@ ss = pygame.image.load("C:\Python\PyGame\SpaceShip.png").convert_alpha()
 ss = pygame.transform.scale(ss, (Spaceshipmiddlesize[0], Spaceshipmiddlesize[1]))
 ss_sx, ss_sy = ss.get_size()
 ss_x = round((size[0]/2)-(ss_sx/2))
-ss_y = round(size[1]-ss_sy-16)
+ss_y = round(size[1]-ss_sy-25)
 
 Missile = pygame.image.load("C:\Python\PyGame\Missile.png").convert_alpha()
 Missile = pygame.transform.scale(Missile, (Missilemiddlesize[0], Missilemiddlesize[1]))
@@ -58,9 +58,21 @@ ghost_y = round(ghostsize[1]/2)
 
 move = 6
 kirbymove = 2
-kirbys=110
+kirbyDownmove = 110
 play = True
 live = True
+
+mmmm = mms_y + size[1]/2
+
+# copy Kirby
+kirby_time = 0
+kirbies = []
+random_time = random.randrange(100, 200)
+
+
+# Shooting Missile
+shootMS = []
+
 while play:
     clock.tick(60)
     
@@ -68,52 +80,37 @@ while play:
         if event.type == pygame.QUIT:
             play = False
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_UP:
-                up_go = True
-            if event.key == pygame.K_DOWN:
-                down_go = True
             if event.key == pygame.K_RIGHT:
                 right_go = True
             if event.key == pygame.K_LEFT:
                 left_go = True
             if event.key == pygame.K_SPACE:
-                space_go = True
+                x_pos_missile = x_pos + mms_x/2
+                shootMS.append([x_pos_missile, mmmm])
         if event.type == pygame.KEYUP:
-            if event.key == pygame.K_UP:
-                up_go = False
-            if event.key == pygame.K_DOWN:
-                down_go = False
             if event.key == pygame.K_RIGHT:
                 right_go = False
             if event.key == pygame.K_LEFT:
                 left_go = False
-            if event.key == pygame.K_SPACE:
-                space_go = False
-    if up_go == True:
-        y_pos -= move
-        if y_pos <= 0:
-            y_pos = 0
-    if down_go == True:
-        y_pos += move
-        if y_pos >= 900:
-            y_pos = 900
     if right_go == True:
         x_pos += move
-        if x_pos >= 1600:
-            x_pos = 1600
+        if x_pos >= 517:
+            x_pos = 517
     if left_go == True:
         x_pos -= move
-        if x_pos <= 0:
-            x_pos = 0
+        if x_pos <= 5:
+            x_pos = 5
+
+
 
 
     if live == True:
-        kirbys -= -2
+        kirbyDownmove += 2
 
     screen.fill(color)
-    screen.blit(ss, (ss_x, ss_y))
+    screen.blit(ss, (x_pos, ss_y))
     #screen.blit(Missile, (x_pos-mms_x, y_pos-mms_y))
-    screen.blit(Kirby, (kirby_transform, kirbys))
+    screen.blit(Kirby, (kirby_transform, kirbyDownmove))
     #screen.blit(Ghost, (x_pos-ghost_x, y_pos-ghost_y))
     # 커비 여러마리 생성
 
